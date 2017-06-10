@@ -10,6 +10,7 @@ class SolveBoard
     @empty_spots = find_empty_spots
     @possible_solution = find_solution
     # binding.pry
+
   end
 
   def split_board
@@ -36,23 +37,29 @@ class SolveBoard
   end
 
   def find_solution
-    p original_board
-    empty_spots.each_with_index do |element, index|
-      original_board[element] += 1
-      while  original_board[element] < 9
-        original_board[element] += 1
-        if row_check(original_board[element], index)
-          original_board[element] += 1
-          if original_board[element] > 9 
-            original_board[element] -= 1
-          end
-          
+binding.pry
+    empty_spots.each_with_index do |element,index|
+# binding.pry
+      current_number = original_board[element]
+      current_number += 1
+      while current_number <= 9
+# binding.pry
+        if !row_check(current_number, element)
+          original_board[element] = current_number
+          break
+# binding.pry
+        else
+          current_number += 1
+# binding.pry
         end
-
       end
-
+# binding.pry
+      if current_number >= 9
+        original_board[element] = 0
+        index -= 1
+binding.pry
+      end
     end
-    p original_board
-    # binding.pry
   end
+
 end
