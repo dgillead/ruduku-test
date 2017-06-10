@@ -35,6 +35,11 @@ class SolveBoard
     # binding.pry
   end
 
+  def row_check(number,index)
+    row = index / 9
+    original_board[row].include?(number)
+  end
+
   def find_solution
     p original_board
     original_board.each_with_index do |element, index|
