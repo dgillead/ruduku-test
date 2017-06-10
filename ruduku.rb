@@ -3,13 +3,13 @@ require_relative 'solve_board'
 class Rudoku
   def initialize(board_string)
     @board = board_string.split('')
+    @board.each_with_index do |element, index|
+      @board[index] = element.to_i
+    end
     @solution = SolveBoard.new(@board)
   end
 
   def board
-    @board.each_with_index do |element, index|
-      @board[index] = element.to_i
-    end
     @board.each_slice(9).to_a
   end
 end
