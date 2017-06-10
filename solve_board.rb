@@ -19,6 +19,11 @@ class SolveBoard
     p is_empty
   end
 
+  def row_check(number,index)
+    row = index / 9
+    original_board[row].include?(number)
+  end
+
   def find_solution
     original_board.each_with_index do |element, index|
       #if col_check && row_check && box_check
