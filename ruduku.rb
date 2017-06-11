@@ -90,7 +90,7 @@ class Ruduku
 
   def find_solution
     index = 0
-    while index < empty_spots.length
+    while index < empty_spots.length && index >= 0
       current_index = empty_spots[index]
       current_number = original_board[current_index]
       current_number += 1
@@ -108,6 +108,9 @@ class Ruduku
         original_board[current_index] = 0
         change_board_array(0,current_index)
         index -= 1
+        if index == -1
+          p 'no solution'
+        end
       end
     end
     p '-------------------------'
