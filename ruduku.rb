@@ -1,11 +1,12 @@
 class Ruduku
-  attr_accessor :empty_spots, :string_array ,:original_board, :board_array
+  attr_accessor :empty_spots, :string_array ,:original_board, :board_array, :current_line
 
-  def initialize(string_array)
-    @string_array = string_array
-    @original_board = make_original_board
-    @empty_spots = find_empty_spots
-    @board_array = make_board_array
+  def initialize(file_name)
+    @string_array = []
+    @original_board = []
+    @empty_spots = []
+    @board_array = []
+    read_file(file_name)
   end
 
   def make_board_array
@@ -21,7 +22,7 @@ class Ruduku
     row = index % 9
     board_array.transpose[row].include?(number)
   end
-  
+
   def square_check(number,index)
     a_to_c = [board_array[0],board_array[1],board_array[2]].transpose
     d_to_f = [board_array[3],board_array[4],board_array[5]].transpose
@@ -81,6 +82,16 @@ class Ruduku
     board_array
   end
 
+  def read_file(file_name)
+    File.foreach(file_name).with_index do |line, line_num|
+       @string_array = line.chomp("\n")
+       @original_board = make_original_board
+       @empty_spots = find_empty_spots
+       @board_array = make_board_array
+       find_solution
+    end
+  end
+
   def find_solution
     index = 0
     while index < empty_spots.length
@@ -103,8 +114,9 @@ class Ruduku
         index -= 1
       end
     end
+    p '-------------------------'
    p board_array
   end
 end
-p game = Ruduku.new('003020600900305001001806400008102900700000008006708200002609500800203009005010300')
-game.find_solution
+game = Ruduku.new('sample_ruduku_board_inputs.csv')
+# game.find_solution
