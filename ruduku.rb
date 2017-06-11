@@ -80,7 +80,7 @@ class Ruduku
 
   def read_file(file_name)
     File.foreach(file_name).with_index do |line, line_num|
-       p "Puzzle number #{line_num}"
+       p "Puzzle number #{line_num + 1}"
        @string_array = line.chomp("\n")
        @original_board = make_original_board
        @empty_spots = find_empty_spots
