@@ -1,5 +1,6 @@
 class Ruduku
-  attr_accessor :empty_spots, :string_array, :original_board, :board_array, :current_line
+  attr_accessor :original_board, :board_array, :current_line
+  attr_reader :empty_spots, :string_array
 
   def initialize(file_name)
     @string_array = []
@@ -12,7 +13,6 @@ class Ruduku
   def make_board_array
     original_board.each_slice(9).to_a
   end
-
   def row_check(number, index) # SolveBoard class
     row = index / 9
     board_array[row].include?(number)
@@ -81,7 +81,7 @@ class Ruduku
   def read_file(file_name)
     File.foreach(file_name).with_index do |line, line_num|
        puts
-       p "Puzzle number #{line_num + 1}"
+       p "Puzzle Number #{line_num + 1}"
        @string_array = line.chomp("\n")
        @original_board = make_original_board
        @empty_spots = find_empty_spots
@@ -132,7 +132,7 @@ class Ruduku
         change_board_array(0,current_index)
         index -= 1
         if index == -1
-          p 'No solution'
+          p 'No Solution'
         end
       end
     end
