@@ -1,5 +1,6 @@
 class Ruduku
-  attr_accessor :empty_spots, :string_array ,:original_board, :board_array, :current_line
+  attr_accessor :original_board, :board_array, :current_line
+  attr_reader :empty_spots, :string_array
 
   def initialize(file_name)
     @string_array = []
@@ -12,18 +13,17 @@ class Ruduku
   def make_board_array
     original_board.each_slice(9).to_a
   end
-  
-  def row_check(number, index)
+  def row_check(number, index) # SolveBoard class
     row = index / 9
     board_array[row].include?(number)
   end
 
-  def column_check(number,index)
+  def column_check(number,index) # SolveBoard class
     row = index % 9
     board_array.transpose[row].include?(number)
   end
 
-  def square_check(number,index)
+  def square_check(number,index) # SolveBoard class
     a_to_c = [board_array[0],board_array[1],board_array[2]].transpose
     d_to_f = [board_array[3],board_array[4],board_array[5]].transpose
     g_to_i = [board_array[6],board_array[7],board_array[8]].transpose
@@ -62,7 +62,7 @@ class Ruduku
     int_array
   end
 
-  def find_empty_spots
+  def find_empty_spots # SolveBoard class
     array_with_zero = []
     original_board.each_with_index do |element,index|
       if element == 0
@@ -111,7 +111,7 @@ class Ruduku
     puts print_string
   end
 
-  def find_solution
+  def find_solution # SolveBoard class
     index = 0
     while index < empty_spots.length && index >= 0
       current_index = empty_spots[index]
@@ -140,4 +140,3 @@ class Ruduku
 
 end
 game = Ruduku.new('sample_ruduku_board_inputs.csv')
-# game.find_solution
