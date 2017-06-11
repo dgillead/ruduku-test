@@ -78,10 +78,6 @@ class Ruduku
     board_array[row][column] = number
   end
 
-  def print_array
-    board_array
-  end
-
   def read_file(file_name)
     File.foreach(file_name).with_index do |line, line_num|
        @string_array = line.chomp("\n")
@@ -117,6 +113,7 @@ class Ruduku
     p '-------------------------'
    p board_array
   end
+
 end
 game = Ruduku.new('sample_ruduku_board_inputs.csv')
 # game.find_solution
