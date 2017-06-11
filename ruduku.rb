@@ -80,13 +80,35 @@ class Ruduku
 
   def read_file(file_name)
     File.foreach(file_name).with_index do |line, line_num|
+       puts
        p "Puzzle number #{line_num + 1}"
        @string_array = line.chomp("\n")
        @original_board = make_original_board
        @empty_spots = find_empty_spots
        @board_array = make_board_array
        find_solution
+       print_board
     end
+  end
+
+  def print_board
+    print_array = []
+    board_array.each do |i|
+      print_array += i.each_slice(3).to_a
+    end
+    print_string = ''
+    print_array.each_with_index do |group,index|
+      if index % 9 == 0
+        print_string += '---------------------'+"\n"
+      end
+      if index % 3 == 2
+        print_string += print_array[index].join(' ')+"\n"
+      else 
+        print_string += print_array[index].join(' ')+' | '
+      end
+    end
+    print_string += '---------------------'+"\n"
+    puts print_string
   end
 
   def find_solution
@@ -114,8 +136,6 @@ class Ruduku
         end
       end
     end
-    p '-------------------------'
-   p board_array
   end
 
 end
